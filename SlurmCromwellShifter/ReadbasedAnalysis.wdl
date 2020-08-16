@@ -40,5 +40,6 @@ workflow ReadbasedAnalysis {
     meta {
         author: "Po-E Li, B10, LANL"
         email: "po-e@lanl.gov"
+        version: "1.0.0"
     }
 }

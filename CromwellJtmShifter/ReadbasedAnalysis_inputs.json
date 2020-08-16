@@ -5,16 +5,16 @@
     "centrifuge": true
   },
   "ReadbasedAnalysis.db": {
-    "gottcha2": "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/database/gottcha2/RefSeq-r90.cg.BacteriaArchaeaViruses.species.fna",
-    "kraken2": "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/database/kraken2/",
-    "centrifuge": "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/database/centrifuge/p_compressed"
+    "gottcha2": "/global/cfs/projectdirs/m3408/aim2/database/gottcha2/RefSeq-r90.cg.BacteriaArchaeaViruses.species.fna",
+    "kraken2": "/global/cfs/projectdirs/m3408/aim2/database/kraken2/",
+    "centrifuge": "/global/cfs/projectdirs/m3408/aim2/database/centrifuge/p_compressed"
   },
   "ReadbasedAnalysis.reads": [
-    "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/Zaire_ebolavirus/SRR1553609_1.fastq.gz",
-    "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/Zaire_ebolavirus/SRR1553609_2.fastq.gz"
+    "/path/to/SRR7877884.1.fastq.gz",
+    "/path/to/SRR7877884.2.fastq.gz"
   ],
   "ReadbasedAnalysis.paired": true,
-  "ReadbasedAnalysis.prefix": "SRR1553609_test",
-  "ReadbasedAnalysis.outdir": "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/SRR1553609_test",
+  "ReadbasedAnalysis.prefix": "SRR7877884",
+  "ReadbasedAnalysis.outdir": "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/SRR7877884",
   "ReadbasedAnalysis.cpu": 4
 }

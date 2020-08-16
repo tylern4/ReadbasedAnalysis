@@ -9,7 +9,7 @@ task profilerGottcha2 {
     command <<<
         mkdir -p ${OUTPATH}
 
-        shifter --image=poeli/nmdc_taxa_profilers:latest gottcha2.py -r ${RELABD_COL} \
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 gottcha2.py -r ${RELABD_COL} \
                     -i ${sep=' ' READS} \
                     -t ${CPU} \
                     -o ${OUTPATH} \
@@ -20,7 +20,7 @@ task profilerGottcha2 {
         awk -F"\t" '{if(NR==1){out=$1"\t"$2"\tROLLUP\tASSIGNED"; { for(i=3;i<=NF;i++){out=out"\t"$i}}; print out;}}' ${OUTPATH}/${PREFIX}.summary.tsv > ${OUTPATH}/${PREFIX}.out.list
         awk -F"\t" '{if(NR>1){out=$1"\t"$2"\t"$4"\t"; { for(i=3;i<=NF;i++){out=out"\t"$i}}; print out;}}' ${OUTPATH}/${PREFIX}.summary.tsv >> ${OUTPATH}/${PREFIX}.out.list
         cp ${OUTPATH}/${PREFIX}.lineage.tsv ${OUTPATH}/${PREFIX}.out.tab_tree
-        shifter --image=poeli/nmdc_taxa_profilers:latest ktImportText ${OUTPATH}/${PREFIX}.out.tab_tree -o ${OUTPATH}/${PREFIX}.krona.html
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 ktImportText ${OUTPATH}/${PREFIX}.out.tab_tree -o ${OUTPATH}/${PREFIX}.krona.html
     >>>
     output {
         File orig_out_tsv = "${OUTPATH}/${PREFIX}.summary.tsv"
@@ -33,7 +33,7 @@ task profilerGottcha2 {
         cluster: "cori"
         time: "01:00:00"
         cpu: CPU
-        mem: "30GB"
+        mem: "60GB"
         node: 1
         nwpn: 4
     }
@@ -53,14 +53,14 @@ task profilerCentrifuge {
     command <<<
         mkdir -p ${OUTPATH}
 
-        shifter --image=poeli/nmdc_taxa_profilers:latest centrifuge -x ${DB} \
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 centrifuge -x ${DB} \
                    -p ${CPU} \
                    -U ${sep=',' READS} \
                    -S ${OUTPATH}/${PREFIX}.classification.csv \
                    --report-file ${OUTPATH}/${PREFIX}.report.csv
         
-        shifter --image=poeli/nmdc_taxa_profilers:latest centrifuge-kreport -x ${DB} ${OUTPATH}/${PREFIX}.classification.csv > ${OUTPATH}/${PREFIX}.kreport.csv
-        shifter --image=poeli/nmdc_taxa_profilers:latest ktImportTaxonomy -m 3 -t 5 ${OUTPATH}/${PREFIX}.kreport.csv -o ${OUTPATH}/${PREFIX}.krona.html
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 centrifuge-kreport -x ${DB} ${OUTPATH}/${PREFIX}.classification.csv > ${OUTPATH}/${PREFIX}.kreport.csv
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 ktImportTaxonomy -m 3 -t 5 ${OUTPATH}/${PREFIX}.kreport.csv -o ${OUTPATH}/${PREFIX}.krona.html
     >>>
     output {
         File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.csv"
@@ -72,7 +72,7 @@ task profilerCentrifuge {
         cluster: "cori"
         time: "01:00:00"
         cpu: CPU
-        mem: "30GB"
+        mem: "60GB"
         node: 1
         nwpn: 4
     }
@@ -93,14 +93,14 @@ task profilerKraken2 {
     command <<<
         mkdir -p ${OUTPATH}
         
-        shifter --image=poeli/nmdc_taxa_profilers:latest kraken2 ${true="--paired" false='' PAIRED} \
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 kraken2 ${true="--paired" false='' PAIRED} \
                             --threads ${CPU} \
                             --db ${DB} \
                             --output ${OUTPATH}/${PREFIX}.classification.csv \
                             --report ${OUTPATH}/${PREFIX}.report.csv \
                             ${sep=' ' READS}
 
-        shifter --image=poeli/nmdc_taxa_profilers:latest ktImportTaxonomy -m 3 -t 5 ${OUTPATH}/${PREFIX}.report.csv -o ${OUTPATH}/${PREFIX}.krona.html
+        shifter --image=nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0 ktImportTaxonomy -m 3 -t 5 ${OUTPATH}/${PREFIX}.report.csv -o ${OUTPATH}/${PREFIX}.krona.html
     >>>
     output {
         File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.csv"
@@ -112,7 +112,7 @@ task profilerKraken2 {
         cluster: "cori"
         time: "01:00:00"
         cpu: CPU
-        mem: "30GB"
+        mem: "60GB"
         node: 1
         nwpn: 4
     }
