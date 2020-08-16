@@ -9,7 +9,7 @@ The pipeline takes sequencing files (single- or paired-end) and profiles them us
 Workflow Diagram
 ----------------
 
-.. image:: readbased_analysis_workflow.png
+.. image:: docs/readbased_analysis_workflow.png
    :align: center
    :scale: 50%
 
@@ -158,4 +158,3 @@ Point of contact
 ----------------
 
 Package maintainer: Po-E Li <po-e@lanl.gov>
-
