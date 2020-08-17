@@ -66,7 +66,7 @@ Zymobiomics mock-community DNA control `(SRR7877884) <https://www.ebi.ac.uk/ena/
 Inputs
 ~~~~~~
 
-* The input is a json file, 
+The input is a json file:
     
 - `ReadbasedAnalysis.enabled_tools`: set the value of the tool as `true` to enable different profiling tools
 - `ReadbasedAnalysis.db`: specify the path of the database

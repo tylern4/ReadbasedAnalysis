@@ -29,7 +29,7 @@ Database
 Each profiling tool requires databases stored in sub-directories at `/global/cfs/projectdirs/m3408/aim2/database/`.
 
 - GOTTCHA2 database (gottcha2/): The database `RefSeq-r90.cg.BacteriaArchaeaViruses.species.fna` is built by complete genomes of bacteria, archaea and viruses from RefSeq Release 90.
-- Kraken2 database (kraken2/): This is a standard Kraken 2 database, built by NCBI RefSeq genomes.
+- Kraken2 database (kraken2/): This is a standard Kraken 2 database, built by NCBI RefSeq genomes.
 - Centrifuge database (centrifuge/)
 
 Workflow Availability
@@ -66,7 +66,7 @@ Zymobiomics mock-community DNA control `(SRR7877884) <https://www.ebi.ac.uk/ena/
 Inputs
 ~~~~~~
 
-* The input is a json file, 
+The input is a json file:
     
 - `ReadbasedAnalysis.enabled_tools`: set the value of the tool as `true` to enable different profiling tools
 - `ReadbasedAnalysis.db`: specify the path of the database
