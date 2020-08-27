@@ -31,7 +31,6 @@ task profilerGottcha2 {
     runtime {
         memory: "30GB"
         cpu: CPU
-        docker: "nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0"
     }
     meta {
         author: "Po-E Li, B10, LANL"
@@ -66,7 +65,6 @@ task profilerCentrifuge {
     runtime {
         memory: "30GB"
         cpu: CPU
-        docker: "nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0"
     }
     meta {
         author: "Po-E Li, B10, LANL"
@@ -102,7 +100,6 @@ task profilerKraken2 {
     runtime {
         memory: "30GB"
         cpu: CPU
-        docker: "nmdc_taxa_profilers/nmdc_taxa_profilers:1.0.0"
     }
     meta {
         author: "Po-E Li, B10, LANL"
