@@ -45,18 +45,13 @@ https://hub.docker.com/r/microbiomedata/nmdc_taxa_profilers
 Running Workflow in Cromwell
 ----------------------------
 
-There is two workflow directories that contain different configurations for Cromwell:
-
-- `CromwellJtmShifter/`: uses JTM backend.
-- `SlurmCromwellShifter/`: uses local backend.
-
-Description of the files in each sud-directory:
+Description of the files:
 
 - `.wdl`: the WDL file for read-based analysis pipeline.
 - `.wdl`: the WDL file for tasks of each tool.
 - `.json`: the example inputs.json file for the pipeline.
 - `.conf`: the conf file for running cromwell.
-- `.sh`: the script for running with jobs using JTM or sbatch to slurm.
+- `.job`: example sbatch file.
 
 Test datasets
 -------------

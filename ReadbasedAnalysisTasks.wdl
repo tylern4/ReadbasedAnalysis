@@ -19,8 +19,7 @@ task profilerGottcha2 {
         awk -F"\t" '{if($NF=="" || $NF=="NOTE"){print $_}}' ${OUTPATH}/${PREFIX}.full.tsv | cut -f -10 > ${OUTPATH}/${PREFIX}.summary.tsv
         awk -F"\t" '{if(NR==1){out=$1"\t"$2"\tROLLUP\tASSIGNED"; { for(i=3;i<=NF;i++){out=out"\t"$i}}; print out;}}' ${OUTPATH}/${PREFIX}.summary.tsv > ${OUTPATH}/${PREFIX}.out.list
         awk -F"\t" '{if(NR>1){out=$1"\t"$2"\t"$4"\t"; { for(i=3;i<=NF;i++){out=out"\t"$i}}; print out;}}' ${OUTPATH}/${PREFIX}.summary.tsv >> ${OUTPATH}/${PREFIX}.out.list
-        cp ${OUTPATH}/${PREFIX}.lineage.tsv ${OUTPATH}/${PREFIX}.out.tab_tree
-        ktImportText ${OUTPATH}/${PREFIX}.out.tab_tree -o ${OUTPATH}/${PREFIX}.krona.html
+        ktImportText ${OUTPATH}/${PREFIX}.lineage.tsv -o ${OUTPATH}/${PREFIX}.krona.html
     >>>
     output {
         File orig_out_tsv = "${OUTPATH}/${PREFIX}.summary.tsv"
@@ -29,7 +28,8 @@ task profilerGottcha2 {
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
-        memory: "30GB"
+        time: "1:30:00"
+        memory: "50GB"
         cpu: CPU
     }
     meta {
@@ -63,7 +63,8 @@ task profilerCentrifuge {
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
-        memory: "30GB"
+        time: "1:00:00"
+        memory: "50GB"
         cpu: CPU
     }
     meta {
@@ -98,7 +99,8 @@ task profilerKraken2 {
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
-        memory: "30GB"
+        time: "1:00:00"
+        memory: "50GB"
         cpu: CPU
     }
     meta {
@@ -106,4 +108,3 @@ task profilerKraken2 {
         email: "po-e@lanl.gov"
     }
 }
-
