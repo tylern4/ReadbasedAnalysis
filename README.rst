@@ -122,7 +122,7 @@ Requirements for Execution
 
 - Docker or other Container Runtime
 - Cromwell or other WDL-capable Workflow Execution Tool
-- > 60 GB RAM
+- 60 GB RAM
 
 Version History
 ---------------
