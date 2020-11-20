@@ -8,6 +8,7 @@ workflow ReadbasedAnalysis {
     String prefix
     String outdir
     Boolean? paired = false
+    String? docker = "microbiomedata/nmdc_taxa_profilers:1.0.0"
 
     if (enabled_tools["gottcha2"] == true) {
         call tp.profilerGottcha2 {
@@ -15,7 +16,8 @@ workflow ReadbasedAnalysis {
                    DB = db["gottcha2"],
                    PREFIX = prefix,
                    OUTPATH = outdir+"/gottcha2",
-                   CPU = cpu
+                   CPU = cpu,
+                   DOCKER = docker
         }
     }
     if (enabled_tools["kraken2"] == true) {
@@ -25,7 +27,8 @@ workflow ReadbasedAnalysis {
                    DB = db["kraken2"],
                    PREFIX = prefix,
                    OUTPATH = outdir+"/kraken2",
-                   CPU = cpu
+                   CPU = cpu,
+                   DOCKER = docker
         }
     }
     if (enabled_tools["centrifuge"] == true) {
@@ -34,7 +37,8 @@ workflow ReadbasedAnalysis {
                    DB = db["centrifuge"],
                    PREFIX = prefix,
                    OUTPATH = outdir+"/centrifuge",
-                   CPU = cpu
+                   CPU = cpu,
+                   DOCKER = docker
         }
     }
     meta {

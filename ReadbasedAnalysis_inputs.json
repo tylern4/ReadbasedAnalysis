@@ -16,5 +16,5 @@
   "ReadbasedAnalysis.paired": true,
   "ReadbasedAnalysis.prefix": "SRR7877884",
   "ReadbasedAnalysis.outdir": "/global/cfs/projectdirs/m3408/aim2/metagenome/ReadbasedAnalysis/SRR7877884",
-  "ReadbasedAnalysis.cpu": 4
+  "ReadbasedAnalysis.cpu": 8
 }

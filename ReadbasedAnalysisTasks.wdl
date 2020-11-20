@@ -4,6 +4,7 @@ task profilerGottcha2 {
     String OUTPATH
     String PREFIX
     String? RELABD_COL = "ROLLUP_DOC"
+    String DOCKER
     Int? CPU = 4
 
     command <<<
@@ -16,20 +17,16 @@ task profilerGottcha2 {
                     -p ${PREFIX} \
                     --database ${DB}
         
-        awk -F"\t" '{if($NF=="" || $NF=="NOTE"){print $_}}' ${OUTPATH}/${PREFIX}.full.tsv | cut -f -10 > ${OUTPATH}/${PREFIX}.summary.tsv
-        awk -F"\t" '{if(NR==1){out=$1"\t"$2"\tROLLUP\tASSIGNED"; { for(i=3;i<=NF;i++){out=out"\t"$i}}; print out;}}' ${OUTPATH}/${PREFIX}.summary.tsv > ${OUTPATH}/${PREFIX}.out.list
-        awk -F"\t" '{if(NR>1){out=$1"\t"$2"\t"$4"\t"; { for(i=3;i<=NF;i++){out=out"\t"$i}}; print out;}}' ${OUTPATH}/${PREFIX}.summary.tsv >> ${OUTPATH}/${PREFIX}.out.list
-        ktImportText ${OUTPATH}/${PREFIX}.lineage.tsv -o ${OUTPATH}/${PREFIX}.krona.html
+        grep "^species" ${OUTPATH}/${PREFIX}.tsv | ktImportTaxonomy -t 3 -m 9 -o ${OUTPATH}/${PREFIX}.krona.html -
     >>>
     output {
-        File orig_out_tsv = "${OUTPATH}/${PREFIX}.summary.tsv"
-        File orig_full_tsv = "${OUTPATH}/${PREFIX}.full.tsv"
-        File orig_log = "${OUTPATH}/${PREFIX}.gottcha_species.log"
+        File orig_out_tsv = "${OUTPATH}/${PREFIX}.full.tsv"
+        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.tsv"
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
-        time: "1:30:00"
-        memory: "50GB"
+        docker: DOCKER
+        memory: "50G"
         cpu: CPU
     }
     meta {
@@ -44,6 +41,7 @@ task profilerCentrifuge {
     String OUTPATH
     String PREFIX
     Int? CPU = 4
+    String DOCKER
 
     command <<<
         mkdir -p ${OUTPATH}
@@ -54,8 +52,7 @@ task profilerCentrifuge {
                    -S ${OUTPATH}/${PREFIX}.classification.csv \
                    --report-file ${OUTPATH}/${PREFIX}.report.csv
         
-        centrifuge-kreport -x ${DB} ${OUTPATH}/${PREFIX}.classification.csv > ${OUTPATH}/${PREFIX}.kreport.csv
-        ktImportTaxonomy -m 3 -t 5 ${OUTPATH}/${PREFIX}.kreport.csv -o ${OUTPATH}/${PREFIX}.krona.html
+        ktImportTaxonomy -m 4 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.csv
     >>>
     output {
         File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.csv"
@@ -63,8 +60,8 @@ task profilerCentrifuge {
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
-        time: "1:00:00"
-        memory: "50GB"
+        docker: DOCKER
+        memory: "50G"
         cpu: CPU
     }
     meta {
@@ -80,6 +77,7 @@ task profilerKraken2 {
     String PREFIX
     Boolean? PAIRED = false
     Int? CPU = 4
+    String DOCKER
 
     command <<<
         mkdir -p ${OUTPATH}
@@ -91,7 +89,7 @@ task profilerKraken2 {
                 --report ${OUTPATH}/${PREFIX}.report.csv \
                 ${sep=' ' READS}
 
-        ktImportTaxonomy -m 3 -t 5 ${OUTPATH}/${PREFIX}.report.csv -o ${OUTPATH}/${PREFIX}.krona.html
+        ktImportTaxonomy -m 3 -t 5 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.csv
     >>>
     output {
         File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.csv"
@@ -99,8 +97,8 @@ task profilerKraken2 {
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
-        time: "1:00:00"
-        memory: "50GB"
+        docker: DOCKER
+        memory: "50G"
         cpu: CPU
     }
     meta {

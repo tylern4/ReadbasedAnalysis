@@ -90,7 +90,7 @@ The input is a json file:
         "ReadbasedAnalysis.paired": true,
         "ReadbasedAnalysis.prefix": "SRR7877884",
         "ReadbasedAnalysis.outdir": "/path/to/ReadbasedAnalysis",
-        "ReadbasedAnalysis.cpu": 4
+        "ReadbasedAnalysis.cpu": 8
     }
 
 
@@ -102,19 +102,16 @@ The workflow creates individual output directories for each tool, including clas
     ReadbasedAnalysis/
     |-- centrifuge
     |   |-- SRR7877884.classification.csv
-    |   |-- SRR7877884.kreport.csv
     |   |-- SRR7877884.krona.html
-    |   `-- SRR7877884.tsv
+    |   `-- SRR7877884.report.tsv
     |-- gottcha2
     |   |-- SRR7877884.full.tsv
     |   |-- SRR7877884.krona.html
-    |   |-- SRR7877884.summary.tsv
     |   `-- SRR7877884.tsv
     `-- kraken2
         |-- SRR7877884.classification.csv
         |-- SRR7877884.krona.html
-        |-- SRR7877884.report.csv
-        `-- SRR7877884.tsv
+        `-- SRR7877884.report.csv
 
 
 Requirements for Execution
@@ -122,12 +119,12 @@ Requirements for Execution
 
 - Docker or other Container Runtime
 - Cromwell or other WDL-capable Workflow Execution Tool
-- 60 GB RAM
+- 50 GB RAM
 
 Version History
 ---------------
 
-- 1.0.0
+- 0.0.1
 
 Point of contact
 ----------------
