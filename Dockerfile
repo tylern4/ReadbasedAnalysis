@@ -1,15 +1,19 @@
 FROM continuumio/miniconda3:4.8.2
-MAINTAINER po-e@lanl.gov
 
-LABEL version="1.0.0"
+LABEL developer="Po-E Li"
+LABEL email="po-e@lanl.gov"
+LABEL version="1.0.1"
 LABEL software="nmdc_taxa_profilers"
-LABEL tags="bioinformatics"
+LABEL tags="metagenome, bioinformatics, NMDC, taxonomy"
 
 ENV container docker
 
 RUN apt-get update -y \
     && apt-get install -y build-essential unzip wget curl gawk \
     && apt-get clean
+
+# copy scripts
+ADD *.py /opt/conda/bin/
 
 # add conda channels
 RUN conda config --add channels conda-forge \

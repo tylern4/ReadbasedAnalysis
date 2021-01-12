@@ -49,14 +49,14 @@ task profilerCentrifuge {
         centrifuge -x ${DB} \
                    -p ${CPU} \
                    -U ${sep=',' READS} \
-                   -S ${OUTPATH}/${PREFIX}.classification.csv \
-                   --report-file ${OUTPATH}/${PREFIX}.report.csv
+                   -S ${OUTPATH}/${PREFIX}.classification.tsv \
+                   --report-file ${OUTPATH}/${PREFIX}.report.tsv
         
-        ktImportTaxonomy -m 4 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.csv
+        ktImportTaxonomy -m 4 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
     >>>
     output {
-        File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.csv"
-        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.report.csv"
+        File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.tsv"
+        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.report.tsv"
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
@@ -85,15 +85,15 @@ task profilerKraken2 {
         kraken2 ${true="--paired" false='' PAIRED} \
                 --threads ${CPU} \
                 --db ${DB} \
-                --output ${OUTPATH}/${PREFIX}.classification.csv \
-                --report ${OUTPATH}/${PREFIX}.report.csv \
+                --output ${OUTPATH}/${PREFIX}.classification.tsv \
+                --report ${OUTPATH}/${PREFIX}.report.tsv \
                 ${sep=' ' READS}
 
-        ktImportTaxonomy -m 3 -t 5 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.csv
+        ktImportTaxonomy -m 3 -t 5 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
     >>>
     output {
-        File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.csv"
-        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.report.csv"
+        File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.tsv"
+        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.report.tsv"
         File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
     }
     runtime {
