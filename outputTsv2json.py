@@ -26,7 +26,8 @@ def output2json(meta):
             'classifiedReadCount': 0,
             'speciesReadCount': 0,
             'speciesCount': 0,
-            'taxonomyTop10': {}
+            'taxonomyTop10': {},
+            'rawResults': {}
         }
 
         def reduceDf(df, cols, ranks=['species','genus','family'], top=10):
@@ -37,7 +38,6 @@ def output2json(meta):
             cols: (rnk_col, name_col, read_count_col, abu_col)
             """
             (rnk_col, name_col, read_count_col, abu_col) = cols
-            df[name_col] = df[name_col].str.strip()
             df[read_count_col] = df[read_count_col].astype(int)
             df[abu_col] = round(df[abu_col], 4)
             outdict = {}
@@ -57,6 +57,7 @@ def output2json(meta):
         if tool == "gottcha2":
             df = pd.read_csv(infile, sep='\t')
             if len(df)>0:
+                result['rawResults'] = df.to_dict('split')
                 result['classifiedReadCount'] = df[df['LEVEL']=='superkingdom'].READ_COUNT.sum()
                 result['speciesReadCount'] = df[df['LEVEL']=='species'].READ_COUNT.sum()
                 result['speciesCount'] = len(df[df['LEVEL']=='species'].index)
@@ -66,6 +67,7 @@ def output2json(meta):
             if len(df)>0:
                 df['abundance'] = df['abundance'].astype(float)
                 df['abundance'] = df['abundance']/100
+                result['rawResults'] = df.to_dict('split')
                 result['classifiedReadCount'] = df.numUniqueReads.sum()
                 result['speciesReadCount'] = df[df['taxRank']=='species'].numUniqueReads.sum()
                 result['speciesCount'] = len(df[df['taxRank']=='species'].index)
@@ -77,6 +79,8 @@ def output2json(meta):
             if len(df)>0:
                 df['abundance'] = df['abundance'].astype(float)
                 df['abundance'] = df['abundance']/100
+                df['name'] = df['name'].str.strip()
+                result['rawResults'] = df.to_dict('split')
                 result['classifiedReadCount'] = df[df['name']=='root'].numReads.values[0]
                 result['speciesReadCount'] = df[df['taxRank']=='S'].numReads.sum()
                 result['speciesCount'] = len(df[df['taxRank']=='S'].index)
