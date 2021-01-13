@@ -64,7 +64,8 @@ def output2json(meta):
         elif tool == "centrifuge":
             df = pd.read_csv(infile, sep='\t')
             if len(df)>0:
-                df['abundance'] = float(df['abundance'])/100
+                df['abundance'] = df['abundance'].astype(float)
+                df['abundance'] = df['abundance']/100
                 result['classifiedReadCount'] = df.numUniqueReads.sum()
                 result['speciesReadCount'] = df[df['taxRank']=='species'].numUniqueReads.sum()
                 result['speciesCount'] = len(df[df['taxRank']=='species'].index)
@@ -74,7 +75,8 @@ def output2json(meta):
                             sep='\t', 
                             names=['abundance','numReads','numUniqueReads','taxRank','taxID','name'])
             if len(df)>0:
-                df['abundance'] = float(df['abundance'])/100
+                df['abundance'] = df['abundance'].astype(float)
+                df['abundance'] = df['abundance']/100
                 result['classifiedReadCount'] = df[df['name']=='root'].numReads.values[0]
                 result['speciesReadCount'] = df[df['taxRank']=='S'].numReads.sum()
                 result['speciesCount'] = len(df[df['taxRank']=='S'].index)
