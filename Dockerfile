@@ -12,9 +12,6 @@ RUN apt-get update -y \
     && apt-get install -y build-essential unzip wget curl gawk \
     && apt-get clean
 
-# copy scripts
-ADD *.py /opt/conda/bin/
-
 # add conda channels
 RUN conda config --add channels conda-forge \
     && conda config --add channels bioconda
@@ -38,5 +35,9 @@ RUN wget https://github.com/DaehwanKimLab/centrifuge/archive/v1.0.4-beta.tar.gz 
 # install krona
 RUN conda install krona \
     && ktUpdateTaxonomy.sh
+
+# install additional libs
+ADD *.py /opt/conda/bin/
+RUN conda install click
 
 CMD ["/bin/bash"]

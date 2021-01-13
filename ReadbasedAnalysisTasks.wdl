@@ -20,9 +20,12 @@ task profilerGottcha2 {
         grep "^species" ${OUTPATH}/${PREFIX}.tsv | ktImportTaxonomy -t 3 -m 9 -o ${OUTPATH}/${PREFIX}.krona.html -
     >>>
     output {
-        File orig_out_tsv = "${OUTPATH}/${PREFIX}.full.tsv"
-        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.tsv"
-        File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
+        Map[String, String] results = {
+            "tool": "gottcha2",
+            "orig_out_tsv": "${OUTPATH}/${PREFIX}.full.tsv",
+            "orig_rep_tsv": "${OUTPATH}/${PREFIX}.tsv",
+            "krona_html": "${OUTPATH}/${PREFIX}.krona.html"
+        }
     }
     runtime {
         docker: DOCKER
@@ -55,9 +58,12 @@ task profilerCentrifuge {
         ktImportTaxonomy -m 4 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
     >>>
     output {
-        File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.tsv"
-        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.report.tsv"
-        File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
+        Map[String, String] results = {
+            "tool": "kraken2",
+            "orig_out_tsv": "${OUTPATH}/${PREFIX}.classification.tsv",
+            "orig_rep_tsv": "${OUTPATH}/${PREFIX}.report.tsv",
+            "krona_html": "${OUTPATH}/${PREFIX}.krona.html"
+        }
     }
     runtime {
         docker: DOCKER
@@ -92,14 +98,39 @@ task profilerKraken2 {
         ktImportTaxonomy -m 3 -t 5 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
     >>>
     output {
-        File orig_out_tsv = "${OUTPATH}/${PREFIX}.classification.tsv"
-        File orig_rep_tsv = "${OUTPATH}/${PREFIX}.report.tsv"
-        File krona_html = "${OUTPATH}/${PREFIX}.krona.html"
+        Map[String, String] results = {
+            "tool": "kraken2",
+            "orig_out_tsv": "${OUTPATH}/${PREFIX}.classification.tsv",
+            "orig_rep_tsv": "${OUTPATH}/${PREFIX}.report.tsv",
+            "krona_html": "${OUTPATH}/${PREFIX}.krona.html"
+        }
     }
     runtime {
-        docker: DOCKER
+        #docker: DOCKER
         memory: "50G"
         cpu: CPU
+    }
+    meta {
+        author: "Po-E Li, B10, LANL"
+        email: "po-e@lanl.gov"
+    }
+}
+
+task generateSummaryJson {
+    Array[Map[String, String]?] TSV_META_JSON
+    String OUTPATH
+    String PREFIX
+    String DOCKER
+
+    command {
+        outputTsv2json.py --meta ${write_json(TSV_META_JSON)} --prefix ${PREFIX} > ${OUTPATH}/${PREFIX}.summary.json
+    }
+    output {
+        File summary_json = "${OUTPATH}/${PREFIX}.summary.json"
+    }
+    runtime {
+        #docker: DOCKER
+        cpu: 1
     }
     meta {
         author: "Po-E Li, B10, LANL"
