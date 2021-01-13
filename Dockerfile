@@ -1,9 +1,10 @@
 FROM continuumio/miniconda3:4.8.2
-MAINTAINER po-e@lanl.gov
 
-LABEL version="1.0.0"
+LABEL developer="Po-E Li"
+LABEL email="po-e@lanl.gov"
+LABEL version="1.0.1"
 LABEL software="nmdc_taxa_profilers"
-LABEL tags="bioinformatics"
+LABEL tags="metagenome, bioinformatics, NMDC, taxonomy"
 
 ENV container docker
 
@@ -34,5 +35,9 @@ RUN wget https://github.com/DaehwanKimLab/centrifuge/archive/v1.0.4-beta.tar.gz 
 # install krona
 RUN conda install krona \
     && ktUpdateTaxonomy.sh
+
+# install additional libs
+RUN conda install click
+ADD *.py /opt/conda/bin/
 
 CMD ["/bin/bash"]

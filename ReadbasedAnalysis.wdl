@@ -1,4 +1,4 @@
-import "ReadbasedAnalysisTasks.wdl" as tp
+import "ReadbasedAnalysisTasks.wdl" as tasks
 
 workflow ReadbasedAnalysis {
     Map[String, Boolean] enabled_tools
@@ -8,10 +8,10 @@ workflow ReadbasedAnalysis {
     String prefix
     String outdir
     Boolean? paired = false
-    String? docker = "microbiomedata/nmdc_taxa_profilers:1.0.0"
+    String? docker = "microbiomedata/nmdc_taxa_profilers:1.0.1"
 
     if (enabled_tools["gottcha2"] == true) {
-        call tp.profilerGottcha2 {
+        call tasks.profilerGottcha2 {
             input: READS = reads,
                    DB = db["gottcha2"],
                    PREFIX = prefix,
@@ -20,8 +20,9 @@ workflow ReadbasedAnalysis {
                    DOCKER = docker
         }
     }
+
     if (enabled_tools["kraken2"] == true) {
-        call tp.profilerKraken2 {
+        call tasks.profilerKraken2 {
             input: READS = reads,
                    PAIRED = paired,
                    DB = db["kraken2"],
@@ -31,8 +32,9 @@ workflow ReadbasedAnalysis {
                    DOCKER = docker
         }
     }
+
     if (enabled_tools["centrifuge"] == true) {
-        call tp.profilerCentrifuge {
+        call tasks.profilerCentrifuge {
             input: READS = reads,
                    DB = db["centrifuge"],
                    PREFIX = prefix,
@@ -41,9 +43,26 @@ workflow ReadbasedAnalysis {
                    DOCKER = docker
         }
     }
+
+    call tasks.generateSummaryJson {
+        input: TSV_META_JSON = [profilerGottcha2.results, profilerCentrifuge.results, profilerKraken2.results],
+               PREFIX = prefix,
+               OUTPATH = outdir,
+               DOCKER = docker
+    }
+
+    output {
+        Map[String, Map[String, String]?] results = {
+            "gottcha2": profilerGottcha2.results,
+            "centrifuge": profilerCentrifuge.results,
+            "kraken2": profilerKraken2.results
+        }
+        File summary_json = generateSummaryJson.summary_json
+    }
+
     meta {
         author: "Po-E Li, B10, LANL"
         email: "po-e@lanl.gov"
-        version: "1.0.0"
+        version: "1.0.1"
     }
 }
