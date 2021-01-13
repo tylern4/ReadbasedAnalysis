@@ -37,7 +37,7 @@ RUN conda install krona \
     && ktUpdateTaxonomy.sh
 
 # install additional libs
-ADD *.py /opt/conda/bin/
 RUN conda install click
+ADD *.py /opt/conda/bin/
 
 CMD ["/bin/bash"]

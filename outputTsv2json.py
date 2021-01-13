@@ -7,9 +7,8 @@ import click
 
 @click.command()
 @click.option('--meta', type=click.File('r'), help='JSON of the metadata of output files')
-@click.option('--prefix', help='Specify prefix input for tools.')
 
-def output2json(meta, prefix):
+def output2json(meta):
     """ Simple converter that takes TSV files to generate a summary JSON. """
     df = pd.DataFrame()
     out_dict = {}
