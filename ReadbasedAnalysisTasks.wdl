@@ -123,7 +123,7 @@ task generateSummaryJson {
     String DOCKER
 
     command {
-        outputTsv2json.py --meta ${write_json(TSV_META_JSON)} --prefix ${PREFIX} > ${OUTPATH}/${PREFIX}.summary.json
+        outputTsv2json.py --meta ${write_json(TSV_META_JSON)} > ${OUTPATH}/${PREFIX}.summary.json
     }
     output {
         File summary_json = "${OUTPATH}/${PREFIX}.summary.json"
