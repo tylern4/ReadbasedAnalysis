@@ -57,29 +57,32 @@ def output2json(meta, prefix):
         # parsing results
         if tool == "gottcha2":
             df = pd.read_csv(infile, sep='\t')
-            result['classifiedReadCount'] = df[df['LEVEL']=='superkingdom'].READ_COUNT.sum()
-            result['speciesReadCount'] = df[df['LEVEL']=='species'].READ_COUNT.sum()
-            result['speciesCount'] = len(df[df['LEVEL']=='species'].index)
-            result['taxonomyTop10'] = reduceDf(df, ['LEVEL', 'NAME', 'READ_COUNT', 'REL_ABUNDANCE'])
+            if len(df)>0:
+                result['classifiedReadCount'] = df[df['LEVEL']=='superkingdom'].READ_COUNT.sum()
+                result['speciesReadCount'] = df[df['LEVEL']=='species'].READ_COUNT.sum()
+                result['speciesCount'] = len(df[df['LEVEL']=='species'].index)
+                result['taxonomyTop10'] = reduceDf(df, ['LEVEL', 'NAME', 'READ_COUNT', 'REL_ABUNDANCE'])
         elif tool == "centrifuge":
             df = pd.read_csv(infile, sep='\t')
-            df['abundance'] = df['abundance']/100
-            result['classifiedReadCount'] = df.numUniqueReads.sum()
-            result['speciesReadCount'] = df[df['taxRank']=='species'].numUniqueReads.sum()
-            result['speciesCount'] = len(df[df['taxRank']=='species'].index)
-            result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance'])
+            if len(df)>0:
+                df['abundance'] = df['abundance']/100
+                result['classifiedReadCount'] = df.numUniqueReads.sum()
+                result['speciesReadCount'] = df[df['taxRank']=='species'].numUniqueReads.sum()
+                result['speciesCount'] = len(df[df['taxRank']=='species'].index)
+                result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance'])
         elif tool == "kraken2":
             df = pd.read_csv(infile,
                             sep='\t', 
                             names=['abundance','numReads','numUniqueReads','taxRank','taxID','name'])
-            df['abundance'] = df['abundance']/100
-            result['classifiedReadCount'] = df[df['name']=='root'].numReads.values[0]
-            result['speciesReadCount'] = df[df['taxRank']=='S'].numReads.sum()
-            result['speciesCount'] = len(df[df['taxRank']=='S'].index)
-            df['taxRank'] = df['taxRank'].str.replace(r'\bS\b', 'species', regex=True)
-            df['taxRank'] = df['taxRank'].str.replace(r'\bG\b', 'genus', regex=True)
-            df['taxRank'] = df['taxRank'].str.replace(r'\bF\b', 'family', regex=True)
-            result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance'])
+            if len(df)>0:
+                df['abundance'] = df['abundance']/100
+                result['classifiedReadCount'] = df[df['name']=='root'].numReads.values[0]
+                result['speciesReadCount'] = df[df['taxRank']=='S'].numReads.sum()
+                result['speciesCount'] = len(df[df['taxRank']=='S'].index)
+                df['taxRank'] = df['taxRank'].str.replace(r'\bS\b', 'species', regex=True)
+                df['taxRank'] = df['taxRank'].str.replace(r'\bG\b', 'genus', regex=True)
+                df['taxRank'] = df['taxRank'].str.replace(r'\bF\b', 'family', regex=True)
+                result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance'])
 
         out_dict[tool] = result
     
@@ -87,7 +90,7 @@ def output2json(meta, prefix):
     def convert(o):
         if isinstance(o, np.generic): return o.item()  
         raise TypeError
-    print(json.dumps(out_dict, indent=4, default=convert))
+    print(json.dumps(out_dict, indent=2, default=convert))
 
 if __name__ == '__main__':
     output2json()

@@ -1,0 +1,253 @@
+{
+  "centrifuge": {
+    "classifiedReadCount": 11227543,
+    "speciesReadCount": 11150485,
+    "speciesCount": 3333,
+    "taxonomyTop10": {
+      "species": {
+        "read_count": {
+          "Rhodopseudomonas palustris": 299864,
+          "Acidobacterium capsulatum": 176378,
+          "Candidatus Solibacter usitatus": 141316,
+          "Granulicella mallensis": 125274,
+          "Candidatus Koribacter versatilis": 118851,
+          "Granulicella tundricola": 117153,
+          "Bradyrhizobium diazoefficiens": 100406,
+          "Bradyrhizobium japonicum": 96005,
+          "Bradyrhizobium sp. SK17": 88134,
+          "Sorangium cellulosum": 87439
+        },
+        "abundance": {
+          "Rhodopseudomonas palustris": 0.0002,
+          "Acidobacterium capsulatum": 0.001,
+          "Candidatus Solibacter usitatus": 0.0002,
+          "Granulicella mallensis": 0.0003,
+          "Candidatus Koribacter versatilis": 0.0001,
+          "Granulicella tundricola": 0.0008,
+          "Bradyrhizobium diazoefficiens": 0.0,
+          "Bradyrhizobium japonicum": 0.0,
+          "Bradyrhizobium sp. SK17": 0.0001,
+          "Sorangium cellulosum": 0.0
+        }
+      },
+      "genus": {
+        "read_count": {
+          "Streptomyces": 45858,
+          "Mycobacterium": 37491,
+          "Burkholderia": 36951,
+          "Pseudomonas": 29920,
+          "Rhizobium": 19453,
+          "Bradyrhizobium": 10740,
+          "Methylobacterium": 9663,
+          "Xanthomonas": 9626,
+          "Rhodococcus": 8150,
+          "Brucella": 7550
+        },
+        "abundance": {
+          "Streptomyces": 0.0,
+          "Mycobacterium": 0.0,
+          "Burkholderia": 0.0,
+          "Pseudomonas": 0.0,
+          "Rhizobium": 0.0,
+          "Bradyrhizobium": 0.0,
+          "Methylobacterium": 0.0,
+          "Xanthomonas": 0.0,
+          "Rhodococcus": 0.0,
+          "Brucella": 0.0
+        }
+      },
+      "family": {
+        "read_count": {
+          "Rhodobacteraceae": 8714,
+          "Burkholderiaceae": 7586,
+          "Comamonadaceae": 7577,
+          "Pseudonocardiaceae": 7418,
+          "Streptomycetaceae": 7220,
+          "Sphingomonadaceae": 6900,
+          "Pseudomonadaceae": 6052,
+          "Xanthomonadaceae": 5291,
+          "Rhodospirillaceae": 5130,
+          "Bradyrhizobiaceae": 4657
+        },
+        "abundance": {
+          "Rhodobacteraceae": 0.0,
+          "Burkholderiaceae": 0.0,
+          "Comamonadaceae": 0.0,
+          "Pseudonocardiaceae": 0.0,
+          "Streptomycetaceae": 0.0,
+          "Sphingomonadaceae": 0.0,
+          "Pseudomonadaceae": 0.0,
+          "Xanthomonadaceae": 0.0,
+          "Rhodospirillaceae": 0.0,
+          "Bradyrhizobiaceae": 0.0
+        }
+      }
+    }
+  },
+  "gottcha2": {
+    "classifiedReadCount": 91791,
+    "speciesReadCount": 91791,
+    "speciesCount": 17,
+    "taxonomyTop10": {
+      "species": {
+        "read_count": {
+          "Bradyrhizobium erythrophlei": 19903,
+          "Edaphobacter aggregans": 15680,
+          "Terracidiphilus gabretensis": 10474,
+          "Acidobacteriaceae bacterium SBC82": 8171,
+          "Candidatus Solibacter usitatus": 7626,
+          "Bradyrhizobium lablabi": 4737,
+          "Silvibacterium bohemicum": 4578,
+          "Granulicella rosea": 4497,
+          "Caedimonas varicaedens": 4493,
+          "Granulicella pectinivorans": 3717
+        },
+        "abundance": {
+          "Bradyrhizobium erythrophlei": 0.148,
+          "Edaphobacter aggregans": 0.1287,
+          "Terracidiphilus gabretensis": 0.1027,
+          "Acidobacteriaceae bacterium SBC82": 0.0624,
+          "Candidatus Solibacter usitatus": 0.0441,
+          "Bradyrhizobium lablabi": 0.0478,
+          "Silvibacterium bohemicum": 0.0396,
+          "Granulicella rosea": 0.0574,
+          "Caedimonas varicaedens": 0.2094,
+          "Granulicella pectinivorans": 0.0463
+        }
+      },
+      "genus": {
+        "read_count": {
+          "Bradyrhizobium": 24640,
+          "Edaphobacter": 15680,
+          "Granulicella": 11021,
+          "Terracidiphilus": 10474,
+          "Acidobacteriaceae bacterium SBC82 - no_g_rank": 8171,
+          "Candidatus Solibacter": 7626,
+          "Silvibacterium": 4578,
+          "Caedimonas": 4493,
+          "Terriglobus": 1574,
+          "Legionella": 951
+        },
+        "abundance": {
+          "Bradyrhizobium": 0.1958,
+          "Edaphobacter": 0.1287,
+          "Granulicella": 0.1328,
+          "Terracidiphilus": 0.1027,
+          "Acidobacteriaceae bacterium SBC82 - no_g_rank": 0.0624,
+          "Candidatus Solibacter": 0.0441,
+          "Silvibacterium": 0.0396,
+          "Caedimonas": 0.2094,
+          "Terriglobus": 0.0186,
+          "Legionella": 0.0185
+        }
+      },
+      "family": {
+        "read_count": {
+          "Acidobacteriaceae": 51498,
+          "Bradyrhizobiaceae": 25281,
+          "Solibacteraceae": 7626,
+          "Caedimonadaceae": 4493,
+          "Legionellaceae": 951,
+          "Microbacteriaceae": 945,
+          "Selenomonadaceae": 622,
+          "Oxalobacteraceae": 375
+        },
+        "abundance": {
+          "Acidobacteriaceae": 0.485,
+          "Bradyrhizobiaceae": 0.2079,
+          "Solibacteraceae": 0.0441,
+          "Caedimonadaceae": 0.2094,
+          "Legionellaceae": 0.0185,
+          "Microbacteriaceae": 0.0166,
+          "Selenomonadaceae": 0.0118,
+          "Oxalobacteraceae": 0.0067
+        }
+      }
+    }
+  },
+  "kraken2": {
+    "classifiedReadCount": 12614256,
+    "speciesReadCount": 8983618,
+    "speciesCount": 5356,
+    "taxonomyTop10": {
+      "species": {
+        "read_count": {
+          "Bradyrhizobium erythrophlei": 285022,
+          "Homo sapiens": 178951,
+          "Acidobacterium capsulatum": 157158,
+          "Candidatus Solibacter usitatus": 144045,
+          "Rhodopseudomonas palustris": 128872,
+          "Acidobacteriaceae bacterium SBC82": 113660,
+          "Terriglobus roseus": 108855,
+          "Candidatus Koribacter versatilis": 108057,
+          "Granulicella mallensis": 107802,
+          "Granulicella tundricola": 100441
+        },
+        "abundance": {
+          "Bradyrhizobium erythrophlei": 0.0026,
+          "Homo sapiens": 0.0016,
+          "Acidobacterium capsulatum": 0.0014,
+          "Candidatus Solibacter usitatus": 0.0013,
+          "Rhodopseudomonas palustris": 0.0012,
+          "Acidobacteriaceae bacterium SBC82": 0.001,
+          "Terriglobus roseus": 0.001,
+          "Candidatus Koribacter versatilis": 0.001,
+          "Granulicella mallensis": 0.001,
+          "Granulicella tundricola": 0.0009
+        }
+      },
+      "genus": {
+        "read_count": {
+          "Bradyrhizobium": 819978,
+          "Streptomyces": 528348,
+          "Pseudomonas": 377240,
+          "Mycobacterium": 263290,
+          "Burkholderia": 214705,
+          "Granulicella": 212130,
+          "Homo": 178951,
+          "Terriglobus": 174650,
+          "Acidobacterium": 157158,
+          "Candidatus Solibacter": 144045
+        },
+        "abundance": {
+          "Bradyrhizobium": 0.0076,
+          "Streptomyces": 0.0049,
+          "Pseudomonas": 0.0035,
+          "Mycobacterium": 0.0024,
+          "Burkholderia": 0.002,
+          "Granulicella": 0.002,
+          "Homo": 0.0016,
+          "Terriglobus": 0.0016,
+          "Acidobacterium": 0.0014,
+          "Candidatus Solibacter": 0.0013
+        }
+      },
+      "family": {
+        "read_count": {
+          "Bradyrhizobiaceae": 1134979,
+          "Acidobacteriaceae": 811935,
+          "Streptomycetaceae": 566978,
+          "Burkholderiaceae": 485497,
+          "Mycobacteriaceae": 409202,
+          "Pseudomonadaceae": 389311,
+          "Rhizobiaceae": 243324,
+          "Sphingomonadaceae": 241934,
+          "Rhodobacteraceae": 227207,
+          "Pseudonocardiaceae": 197226
+        },
+        "abundance": {
+          "Bradyrhizobiaceae": 0.0105,
+          "Acidobacteriaceae": 0.0075,
+          "Streptomycetaceae": 0.0052,
+          "Burkholderiaceae": 0.0045,
+          "Mycobacteriaceae": 0.0038,
+          "Pseudomonadaceae": 0.0036,
+          "Rhizobiaceae": 0.0022,
+          "Sphingomonadaceae": 0.0022,
+          "Rhodobacteraceae": 0.0021,
+          "Pseudonocardiaceae": 0.0018
+        }
+      }
+    }
+  }
+}
