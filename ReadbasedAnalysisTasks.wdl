@@ -106,7 +106,7 @@ task profilerKraken2 {
         }
     }
     runtime {
-        #docker: DOCKER
+        docker: DOCKER
         memory: "50G"
         cpu: CPU
     }
@@ -129,7 +129,7 @@ task generateSummaryJson {
         File summary_json = "${OUTPATH}/${PREFIX}.summary.json"
     }
     runtime {
-        #docker: DOCKER
+        docker: DOCKER
         cpu: 1
     }
     meta {
