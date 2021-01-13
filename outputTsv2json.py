@@ -35,20 +35,20 @@ def output2json(meta):
             Report top # rows of ranks respectively and return a dict
 
             df: results in dataframe
-            cols: (rnk_col, name_col, read_count_col, abu_col)
+            cols: (rnk_col, name_col, read_count_col, abu_col, taxid_col)
             """
-            (rnk_col, name_col, read_count_col, abu_col) = cols
+            (rnk_col, name_col, read_count_col, abu_col, taxid_col) = cols
             df[read_count_col] = df[read_count_col].astype(int)
             df[abu_col] = round(df[abu_col], 4)
             outdict = {}
             for rank in ranks:
                 taxdf = df[df[rnk_col]==rank] \
                     .sort_values(read_count_col, ascending=False) \
-                    .loc[:, [name_col, read_count_col, abu_col]] \
+                    .loc[:, [name_col, taxid_col, read_count_col, abu_col]] \
                     .rename(columns={name_col: 'name', read_count_col: 'read_count', abu_col: 'abundance'}) \
-                    .set_index('name') \
+                    .set_index(taxid_col) \
                     .head(top) \
-                    .to_dict()
+                    .to_dict('split')
                 outdict[rank] = taxdf
             
             return outdict
@@ -57,21 +57,21 @@ def output2json(meta):
         if tool == "gottcha2":
             df = pd.read_csv(infile, sep='\t')
             if len(df)>0:
-                result['rawResults'] = df.to_dict('split')
+                result['rawResults'] = df.set_index('TAXID').to_dict('split')
                 result['classifiedReadCount'] = df[df['LEVEL']=='superkingdom'].READ_COUNT.sum()
                 result['speciesReadCount'] = df[df['LEVEL']=='species'].READ_COUNT.sum()
                 result['speciesCount'] = len(df[df['LEVEL']=='species'].index)
-                result['taxonomyTop10'] = reduceDf(df, ['LEVEL', 'NAME', 'READ_COUNT', 'REL_ABUNDANCE'])
+                result['taxonomyTop10'] = reduceDf(df, ['LEVEL', 'NAME', 'READ_COUNT', 'REL_ABUNDANCE', 'TAXID'])
         elif tool == "centrifuge":
             df = pd.read_csv(infile, sep='\t')
             if len(df)>0:
                 df['abundance'] = df['abundance'].astype(float)
                 df['abundance'] = df['abundance']/100
-                result['rawResults'] = df.to_dict('split')
+                result['rawResults'] = df.set_index('taxID').to_dict('split')
                 result['classifiedReadCount'] = df.numUniqueReads.sum()
                 result['speciesReadCount'] = df[df['taxRank']=='species'].numUniqueReads.sum()
                 result['speciesCount'] = len(df[df['taxRank']=='species'].index)
-                result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance'])
+                result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance', 'taxID'])
         elif tool == "kraken2":
             df = pd.read_csv(infile,
                             sep='\t', 
@@ -80,14 +80,14 @@ def output2json(meta):
                 df['abundance'] = df['abundance'].astype(float)
                 df['abundance'] = df['abundance']/100
                 df['name'] = df['name'].str.strip()
-                result['rawResults'] = df.to_dict('split')
+                result['rawResults'] = df.set_index('taxID').to_dict('split')
                 result['classifiedReadCount'] = df[df['name']=='root'].numReads.values[0]
                 result['speciesReadCount'] = df[df['taxRank']=='S'].numReads.sum()
                 result['speciesCount'] = len(df[df['taxRank']=='S'].index)
                 df['taxRank'] = df['taxRank'].str.replace(r'\bS\b', 'species', regex=True)
                 df['taxRank'] = df['taxRank'].str.replace(r'\bG\b', 'genus', regex=True)
                 df['taxRank'] = df['taxRank'].str.replace(r'\bF\b', 'family', regex=True)
-                result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance'])
+                result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance', 'taxID'])
 
         out_dict[tool] = result
     
