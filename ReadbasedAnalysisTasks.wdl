@@ -59,7 +59,7 @@ task profilerCentrifuge {
     >>>
     output {
         Map[String, String] results = {
-            "tool": "kraken2",
+            "tool": "centrifuge",
             "orig_out_tsv": "${OUTPATH}/${PREFIX}.classification.tsv",
             "orig_rep_tsv": "${OUTPATH}/${PREFIX}.report.tsv",
             "krona_html": "${OUTPATH}/${PREFIX}.krona.html"
