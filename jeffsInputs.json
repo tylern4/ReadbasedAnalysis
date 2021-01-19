@@ -1,0 +1,14 @@
+{
+  "ReadbasedAnalysis.enabled_tools": {
+    "gottcha2": true,
+    "kraken2": true,
+    "centrifuge": true
+  },
+  "ReadbasedAnalysis.reads": [
+    "/global/cscratch1/sd/jfroula/JAWS/jaws/examples/NMDC/ReadbasedAnalysis/12844.1.289902.TACGCCTT-AAGGCGTA.fastq.gz",
+    "/global/cscratch1/sd/jfroula/JAWS/jaws/examples/NMDC/ReadbasedAnalysis/12900.2.296456.GCTACGTT-AACGTAGC.fastq.gz"
+  ],
+  "ReadbasedAnalysis.paired": true,
+  "ReadbasedAnalysis.prefix": "SRR7877884",
+  "ReadbasedAnalysis.cpu": 32
+}
