@@ -8,6 +8,7 @@ task profilerGottcha2 {
     Int? CPU = 4
 
     command <<<
+        set -euo pipefail
         mkdir -p ${OUTPATH}
 
         gottcha2.py -r ${RELABD_COL} \
@@ -29,8 +30,13 @@ task profilerGottcha2 {
     }
     runtime {
         docker: DOCKER
-        memory: "50G"
         cpu: CPU
+        poolname: "readbaseanalysis-pool"
+        node: 1
+        nwpn: 1
+        mem: "45G"
+        time: "04:00:00"
+        shared: 0
     }
     meta {
         author: "Po-E Li, B10, LANL"
@@ -47,6 +53,7 @@ task profilerCentrifuge {
     String DOCKER
 
     command <<<
+        set -euo pipefail
         mkdir -p ${OUTPATH}
 
         centrifuge -x ${DB} \
@@ -67,8 +74,13 @@ task profilerCentrifuge {
     }
     runtime {
         docker: DOCKER
-        memory: "50G"
         cpu: CPU
+        poolname: "readbaseanalysis-pool"
+        node: 1
+        nwpn: 1
+        mem: "45G"
+        time: "04:00:00"
+        shared: 0
     }
     meta {
         author: "Po-E Li, B10, LANL"
@@ -86,6 +98,7 @@ task profilerKraken2 {
     String DOCKER
 
     command <<<
+        set -euo pipefail
         mkdir -p ${OUTPATH}
         
         kraken2 ${true="--paired" false='' PAIRED} \
@@ -107,8 +120,13 @@ task profilerKraken2 {
     }
     runtime {
         docker: DOCKER
-        memory: "50G"
         cpu: CPU
+        poolname: "readbaseanalysis-pool"
+        node: 1
+        nwpn: 1
+        mem: "45G"
+        time: "04:00:00"
+        shared: 0
     }
     meta {
         author: "Po-E Li, B10, LANL"
@@ -130,7 +148,12 @@ task generateSummaryJson {
     }
     runtime {
         docker: DOCKER
-        cpu: 1
+        poolname: "readbaseanalysis-pool"
+        node: 1
+        nwpn: 1
+        mem: "45G"
+        time: "04:00:00"
+        shared: 0
     }
     meta {
         author: "Po-E Li, B10, LANL"
