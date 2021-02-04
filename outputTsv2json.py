@@ -49,6 +49,10 @@ def output2json(meta):
                     .set_index(taxid_col) \
                     .head(top) \
                     .to_dict('split')
+                
+                if 'index' in taxdf:
+                    taxdf['taxID'] = taxdf.pop('index')
+                
                 outdict[rank] = taxdf
             
             return outdict
@@ -89,6 +93,10 @@ def output2json(meta):
                 df['taxRank'] = df['taxRank'].str.replace(r'\bF\b', 'family', regex=True)
                 result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance', 'taxID'])
 
+        # rename 'index' to 'taxID'
+        if 'index' in result['rawResults']:
+            result['taxID'] = result['rawResults'].pop('index')
+        
         out_dict[tool] = result
     
     # print summary JSON

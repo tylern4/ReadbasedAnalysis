@@ -62,7 +62,7 @@ task profilerCentrifuge {
                    -S ${OUTPATH}/${PREFIX}.classification.tsv \
                    --report-file ${OUTPATH}/${PREFIX}.report.tsv
         
-        ktImportTaxonomy -m 4 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
+        ktImportTaxonomy -m 5 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
     >>>
     output {
         Map[String, String] results = {
@@ -141,10 +141,10 @@ task generateSummaryJson {
     String DOCKER
 
     command {
-        outputTsv2json.py --meta ${write_json(TSV_META_JSON)} > ${OUTPATH}/${PREFIX}.summary.json
+        outputTsv2json.py --meta ${write_json(TSV_META_JSON)} > ${OUTPATH}/${PREFIX}.json
     }
     output {
-        File summary_json = "${OUTPATH}/${PREFIX}.summary.json"
+        File summary_json = "${OUTPATH}/${PREFIX}.json"
     }
     runtime {
         docker: DOCKER
