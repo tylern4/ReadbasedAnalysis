@@ -62,7 +62,7 @@ task profilerCentrifuge {
                    -S ${OUTPATH}/${PREFIX}.classification.tsv \
                    --report-file ${OUTPATH}/${PREFIX}.report.tsv
         
-        ktImportTaxonomy -m 4 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
+        ktImportTaxonomy -m 5 -t 2 -o ${OUTPATH}/${PREFIX}.krona.html ${OUTPATH}/${PREFIX}.report.tsv
     >>>
     output {
         Map[String, String] results = {
