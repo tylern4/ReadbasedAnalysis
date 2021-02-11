@@ -59,7 +59,11 @@ def output2json(meta):
 
         # parsing results
         if tool == "gottcha2":
-            df = pd.read_csv(infile, sep='\t')
+            try:
+                df = pd.read_csv(infile, sep='\t')
+            except:
+                pass
+
             if len(df)>0:
                 result['rawResults'] = df.set_index('TAXID').to_dict('split')
                 result['classifiedReadCount'] = df[df['LEVEL']=='superkingdom'].READ_COUNT.sum()
@@ -67,7 +71,11 @@ def output2json(meta):
                 result['speciesCount'] = len(df[df['LEVEL']=='species'].index)
                 result['taxonomyTop10'] = reduceDf(df, ['LEVEL', 'NAME', 'READ_COUNT', 'REL_ABUNDANCE', 'TAXID'])
         elif tool == "centrifuge":
-            df = pd.read_csv(infile, sep='\t')
+            try:
+                df = pd.read_csv(infile, sep='\t')
+            except:
+                pass
+
             if len(df)>0:
                 df['abundance'] = df['abundance'].astype(float)
                 df['abundance'] = df['abundance']/100
@@ -77,9 +85,13 @@ def output2json(meta):
                 result['speciesCount'] = len(df[df['taxRank']=='species'].index)
                 result['taxonomyTop10'] = reduceDf(df, ['taxRank', 'name', 'numReads', 'abundance', 'taxID'])
         elif tool == "kraken2":
-            df = pd.read_csv(infile,
+            try:
+                df = pd.read_csv(infile,
                             sep='\t', 
                             names=['abundance','numReads','numUniqueReads','taxRank','taxID','name'])
+            except:
+                pass
+
             if len(df)>0:
                 df['abundance'] = df['abundance'].astype(float)
                 df['abundance'] = df['abundance']/100

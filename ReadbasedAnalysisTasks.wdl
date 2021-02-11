@@ -10,6 +10,7 @@ task profilerGottcha2 {
     command <<<
         set -euo pipefail
         mkdir -p ${OUTPATH}
+        touch ${OUTPATH}/${PREFIX}.full.tsv
 
         gottcha2.py -r ${RELABD_COL} \
                     -i ${sep=' ' READS} \
@@ -18,7 +19,7 @@ task profilerGottcha2 {
                     -p ${PREFIX} \
                     --database ${DB}
         
-        grep "^species" ${OUTPATH}/${PREFIX}.tsv | ktImportTaxonomy -t 3 -m 9 -o ${OUTPATH}/${PREFIX}.krona.html -
+        grep "^species" ${OUTPATH}/${PREFIX}.tsv | ktImportTaxonomy -t 3 -m 9 -o ${OUTPATH}/${PREFIX}.krona.html - || true
     >>>
     output {
         Map[String, String] results = {
