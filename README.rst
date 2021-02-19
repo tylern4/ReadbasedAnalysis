@@ -147,6 +147,8 @@ gottcha2/SRR7877884.full.tsv              GOTTCHA2 detail output TSV file
 gottcha2/SRR7877884.tsv                   GOTTCHA2 output report TSV file
 gottcha2/SRR7877884.krona.html            GOTTCHA2 krona plot HTML file
 kraken2/SRR7877884.classification.tsv     Kraken2 output read classification TSV file
+kraken2/SRR7877884.report.tsv             Kraken2 output report TSV file
+kraken2/SRR7877884.krona.html             Kraken2 krona plot HTML file
 ========================================  ==============================================
 
 
