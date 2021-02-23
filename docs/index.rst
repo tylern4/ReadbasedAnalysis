@@ -42,6 +42,7 @@ Requisite databases:
 ~~~~~~~~~~~~~~~~~~~~
 
 The database for each tool must be downloaded and installed. These databases total 152 GB.
+
 - GOTTCHA2 database (gottcha2/):
 
 The database RefSeqr90.cg.BacteriaArchaeaViruses.species.fna contains complete genomes of bacteria, archaea and viruses from RefSeq Release 90. The following commands will download the database:
