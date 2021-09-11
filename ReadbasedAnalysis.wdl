@@ -6,7 +6,7 @@ workflow ReadbasedAnalysis {
     Array[File] reads
     Int cpu
     String prefix
-    String outdir
+    String? outdir
     Boolean? paired = false
     String? docker = "microbiomedata/nmdc_taxa_profilers:1.0.2"
 
@@ -47,18 +47,20 @@ workflow ReadbasedAnalysis {
 #               OUTPATH = outdir,
 #               DOCKER = docker
 #    }
-    call make_outputs {
-        input: gottcha2_report_tsv = profilerGottcha2.report_tsv,
-               gottcha2_full_tsv = profilerGottcha2.full_tsv,
-               gottcha2_krona_html = profilerGottcha2.krona_html,
-               centrifuge_classification_tsv = profilerCentrifuge.classification_tsv,
-               centrifuge_report_tsv = profilerCentrifuge.report_tsv,
-               centrifuge_krona_html = profilerCentrifuge.krona_html,
-               kraken2_classification_tsv = profilerKraken2.classification_tsv,
-               kraken2_report_tsv = profilerKraken2.report_tsv,
-               kraken2_krona_html = profilerKraken2.krona_html,
-               outdir = outdir,
-               container = docker
+    if (defined(outdir)){
+        call make_outputs {
+            input: gottcha2_report_tsv = profilerGottcha2.report_tsv,
+                   gottcha2_full_tsv = profilerGottcha2.full_tsv,
+                   gottcha2_krona_html = profilerGottcha2.krona_html,
+                   centrifuge_classification_tsv = profilerCentrifuge.classification_tsv,
+                   centrifuge_report_tsv = profilerCentrifuge.report_tsv,
+                   centrifuge_krona_html = profilerCentrifuge.krona_html,
+                   kraken2_classification_tsv = profilerKraken2.classification_tsv,
+                   kraken2_report_tsv = profilerKraken2.report_tsv,
+                   kraken2_krona_html = profilerKraken2.krona_html,
+                   outdir = outdir,
+                   container = docker
+        }
     }
 
     output {
