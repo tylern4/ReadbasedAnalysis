@@ -1,0 +1,292 @@
+{
+  "gottcha2": {
+    "classifiedReadCount": 0,
+    "speciesReadCount": 0,
+    "speciesCount": 0,
+    "taxonomyTop10": {},
+    "rawResults": {}
+  },
+  "centrifuge": {
+    "classifiedReadCount": 2,
+    "speciesReadCount": 2,
+    "speciesCount": 6,
+    "taxonomyTop10": {
+      "species": {
+        "columns": [
+          "name",
+          "read_count",
+          "abundance"
+        ],
+        "data": [
+          [
+            "Escherichia coli",
+            6,
+            0.0
+          ],
+          [
+            "Salmonella sp. HNK130",
+            4,
+            0.01
+          ],
+          [
+            "Shigella boydii",
+            2,
+            0.0
+          ],
+          [
+            "Shigella dysenteriae",
+            1,
+            0.0
+          ],
+          [
+            "Shigella flexneri",
+            1,
+            0.0
+          ],
+          [
+            "Shigella sonnei",
+            1,
+            0.0
+          ]
+        ],
+        "taxID": [
+          562,
+          2664291,
+          621,
+          622,
+          623,
+          624
+        ]
+      },
+      "genus": {
+        "columns": [
+          "name",
+          "read_count",
+          "abundance"
+        ],
+        "data": [],
+        "taxID": []
+      },
+      "family": {
+        "columns": [
+          "name",
+          "read_count",
+          "abundance"
+        ],
+        "data": [],
+        "taxID": []
+      }
+    },
+    "rawResults": {
+      "columns": [
+        "name",
+        "taxRank",
+        "genomeSize",
+        "numReads",
+        "numUniqueReads",
+        "abundance"
+      ],
+      "data": [
+        [
+          "Escherichia coli",
+          "species",
+          8460827,
+          6,
+          1,
+          0.0
+        ],
+        [
+          "Shigella boydii",
+          "species",
+          4760589,
+          2,
+          1,
+          0.0
+        ],
+        [
+          "Shigella dysenteriae",
+          "species",
+          4520554,
+          1,
+          0,
+          0.0
+        ],
+        [
+          "Shigella flexneri",
+          "species",
+          7250520,
+          1,
+          0,
+          0.0
+        ],
+        [
+          "Shigella sonnei",
+          "species",
+          5137894,
+          1,
+          0,
+          0.0
+        ],
+        [
+          "Salmonella sp. HNK130",
+          "species",
+          4753000,
+          4,
+          0,
+          0.01
+        ]
+      ]
+    },
+    "taxID": [
+      562,
+      621,
+      622,
+      623,
+      624,
+      2664291
+    ]
+  },
+  "kraken2": {
+    "classifiedReadCount": 26,
+    "speciesReadCount": 8,
+    "speciesCount": 1,
+    "taxonomyTop10": {
+      "species": {
+        "columns": [
+          "name",
+          "read_count",
+          "abundance"
+        ],
+        "data": [
+          [
+            "Escherichia coli",
+            8,
+            0.3077
+          ]
+        ],
+        "taxID": [
+          562
+        ]
+      },
+      "genus": {
+        "columns": [
+          "name",
+          "read_count",
+          "abundance"
+        ],
+        "data": [
+          [
+            "Escherichia",
+            8,
+            0.3077
+          ]
+        ],
+        "taxID": [
+          561
+        ]
+      },
+      "family": {
+        "columns": [
+          "name",
+          "read_count",
+          "abundance"
+        ],
+        "data": [
+          [
+            "Enterobacteriaceae",
+            26,
+            1.0
+          ]
+        ],
+        "taxID": [
+          543
+        ]
+      }
+    },
+    "rawResults": {
+      "columns": [
+        "abundance",
+        "numReads",
+        "numUniqueReads",
+        "taxRank",
+        "name"
+      ],
+      "data": [
+        [
+          1.0,
+          26,
+          0,
+          "R",
+          "root"
+        ],
+        [
+          1.0,
+          26,
+          0,
+          "R1",
+          "cellular organisms"
+        ],
+        [
+          1.0,
+          26,
+          0,
+          "D",
+          "Bacteria"
+        ],
+        [
+          1.0,
+          26,
+          0,
+          "P",
+          "Proteobacteria"
+        ],
+        [
+          1.0,
+          26,
+          0,
+          "C",
+          "Gammaproteobacteria"
+        ],
+        [
+          1.0,
+          26,
+          0,
+          "O",
+          "Enterobacterales"
+        ],
+        [
+          1.0,
+          26,
+          18,
+          "F",
+          "Enterobacteriaceae"
+        ],
+        [
+          0.3077,
+          8,
+          0,
+          "G",
+          "Escherichia"
+        ],
+        [
+          0.3077,
+          8,
+          8,
+          "S",
+          "Escherichia coli"
+        ]
+      ]
+    },
+    "taxID": [
+      1,
+      131567,
+      2,
+      1224,
+      1236,
+      91347,
+      543,
+      561,
+      562
+    ]
+  }
+}
