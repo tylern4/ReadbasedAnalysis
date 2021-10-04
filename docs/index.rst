@@ -1,5 +1,5 @@
- The Read-based Taxonomy Classification (v1.0.1)
-================================
+The Read-based Taxonomy Classification (v1.0.1)
+================================================
 
 .. image:: readbased_analysis_workflow.png
    :align: center
