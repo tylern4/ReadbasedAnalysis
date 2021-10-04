@@ -1,4 +1,4 @@
-The Read-based Analysis Workflow
+ The Read-based Taxonomy Classification Workflow
 ================================
 
 .. image:: docs/readbased_analysis_workflow.png
