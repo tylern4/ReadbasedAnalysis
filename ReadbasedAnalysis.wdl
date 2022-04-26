@@ -6,9 +6,10 @@ workflow ReadbasedAnalysis {
     Array[File] reads
     Int cpu
     String prefix
-    String outdir
+    String? outdir
     Boolean? paired = false
-    String? docker = "microbiomedata/nmdc_taxa_profilers:1.0.2"
+    #String? docker = "microbiomedata/nmdc_taxa_profilers:1.0.2"
+    String docker = "microbiomedata/nmdc_taxa_profilers@sha256:a56c3b2978869dd26e98daeb60ca9f2432dedb11c191cd3b0316a1827956c3a2"
 
     if (enabled_tools["gottcha2"] == true) {
         call tasks.profilerGottcha2 {
@@ -47,18 +48,20 @@ workflow ReadbasedAnalysis {
 #               OUTPATH = outdir,
 #               DOCKER = docker
 #    }
-    call make_outputs {
-        input: gottcha2_report_tsv = profilerGottcha2.report_tsv,
-               gottcha2_full_tsv = profilerGottcha2.full_tsv,
-               gottcha2_krona_html = profilerGottcha2.krona_html,
-               centrifuge_classification_tsv = profilerCentrifuge.classification_tsv,
-               centrifuge_report_tsv = profilerCentrifuge.report_tsv,
-               centrifuge_krona_html = profilerCentrifuge.krona_html,
-               kraken2_classification_tsv = profilerKraken2.classification_tsv,
-               kraken2_report_tsv = profilerKraken2.report_tsv,
-               kraken2_krona_html = profilerKraken2.krona_html,
-               outdir = outdir,
-               container = docker
+    if (defined(outdir)){
+        call make_outputs {
+            input: gottcha2_report_tsv = profilerGottcha2.report_tsv,
+                   gottcha2_full_tsv = profilerGottcha2.full_tsv,
+                   gottcha2_krona_html = profilerGottcha2.krona_html,
+                   centrifuge_classification_tsv = profilerCentrifuge.classification_tsv,
+                   centrifuge_report_tsv = profilerCentrifuge.report_tsv,
+                   centrifuge_krona_html = profilerCentrifuge.krona_html,
+                   kraken2_classification_tsv = profilerKraken2.classification_tsv,
+                   kraken2_report_tsv = profilerKraken2.report_tsv,
+                   kraken2_krona_html = profilerKraken2.krona_html,
+                   outdir = outdir,
+                   container = docker
+        }
     }
 
     output {
@@ -108,11 +111,10 @@ task make_outputs{
     >>>
     runtime {
         docker: container
-        memory: "1 GiB"
+        memory: "1G"
         cpu:  1
     }
     output{
         Array[String] fastq_files = glob("${outdir}/*.fastq*")
     }
 }
-

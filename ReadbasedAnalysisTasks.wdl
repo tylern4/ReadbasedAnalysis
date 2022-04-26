@@ -15,7 +15,7 @@ task profilerGottcha2 {
                     -o . \
                     -p ${PREFIX} \
                     --database ${DB}
-        
+
         grep "^species" ${PREFIX}.tsv | ktImportTaxonomy -t 3 -m 9 -o ${PREFIX}.krona.html - || true
     >>>
     output {
@@ -26,9 +26,7 @@ task profilerGottcha2 {
     runtime {
         docker: DOCKER
         cpu: CPU
-        node: 1
-        nwpn: 1
-        mem: "45G"
+        memory: "45G"
         time: "04:00:00"
     }
     meta {
@@ -52,7 +50,7 @@ task profilerCentrifuge {
                    -U ${sep=',' READS} \
                    -S ${PREFIX}.classification.tsv \
                    --report-file ${PREFIX}.report.tsv
-        
+
         ktImportTaxonomy -m 5 -t 2 -o ${PREFIX}.krona.html ${PREFIX}.report.tsv
     >>>
     output {
@@ -63,9 +61,7 @@ task profilerCentrifuge {
     runtime {
         docker: DOCKER
         cpu: CPU
-        node: 1
-        nwpn: 1
-        mem: "45G"
+        memory: "45G"
         time: "04:00:00"
     }
     meta {
@@ -84,7 +80,7 @@ task profilerKraken2 {
 
     command <<<
         set -euo pipefail
-        
+
         kraken2 ${true="--paired" false='' PAIRED} \
                 --threads ${CPU} \
                 --db ${DB} \
@@ -102,9 +98,7 @@ task profilerKraken2 {
     runtime {
         docker: DOCKER
         cpu: CPU
-        node: 1
-        nwpn: 1
-        mem: "45G"
+        memory: "45G"
         time: "04:00:00"
     }
     meta {
@@ -126,9 +120,7 @@ task generateSummaryJson {
     }
     runtime {
         docker: DOCKER
-        node: 1
-        nwpn: 1
-        mem: "45G"
+        memory: "45G"
         time: "04:00:00"
     }
     meta {
